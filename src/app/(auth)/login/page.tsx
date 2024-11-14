@@ -1,78 +1,53 @@
-"use client";
-import React from "react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+// page.tsx
+'use client';
+// page.tsx
 
-export default function LoginFormDemo() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Form submitted");
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function Dashboard() {
+  const [personId, setPersonId] = useState('');
+  const router = useRouter();
+
+  const handleSearch = () => {
+    console.log(`Searching for person ID: ${personId}`);
+  };
+
+  const handleRedirect = () => {
+    window.location.href = 'https://universe.roboflow.com/facial-expression-detection-no05b/facial-expression-detection2/model/1';
   };
 
   return (
-    <div className="bg-black min-h-screen flex items-center justify-center py-10">
-      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-black border border-neutral-800">
-        <h2 className="font-bold text-xl text-white">
-          Login to Aceternity
-        </h2>
-        <p className="text-neutral-400 text-sm max-w-sm mt-2">
-          Login to Aceternity if you can because we don&apos;t have a login flow
-          yet.
-        </p>
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white p-8">
+      <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg p-6">
+        {/* User Name */}
+        <h2 className="text-4xl font-semibold text-center mb-8">Rahul Roy</h2>
 
-        <form className="my-8" onSubmit={handleSubmit}>
-          <LabelInputContainer className="mb-4">
-            <Label className="text-white" htmlFor="email">Email Address</Label>
-            <Input
-              id="email"
-              placeholder="projectmayhem@fc.com"
-              type="email"
-              className="bg-neutral-800 border border-neutral-800 placeholder:text-neutral-500 text-white focus:ring-0 focus:border-neutral-800"
-            />
-          </LabelInputContainer>
-          <LabelInputContainer className="mb-4">
-            <Label className="text-white" htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              placeholder="••••••••"
-              type="password"
-              className="bg-neutral-800 border border-neutral-800 placeholder:text-neutral-500 text-white focus:ring-0 focus:border-neutral-800"
-            />
-          </LabelInputContainer>
-
+        {/* Person ID Input and Search Button */}
+        <div className="flex gap-4 mb-6">
+          <input
+            type="text"
+            placeholder="Search for an existing user..."
+            value={personId}
+            onChange={(e) => setPersonId(e.target.value)}
+            className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
           <button
-            className="bg-gradient-to-br relative group/btn from-neutral-900 to-neutral-800 block w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset]"
-            type="submit"
+            onClick={handleSearch}
+            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 min-w-[120px]"
           >
-            Log In &rarr;
-            <BottomGradient />
+            Search
           </button>
-        </form>
+        </div>
+
+        {/* Redirect Button with distinguishable dark shade */}
+        <button
+          onClick={handleRedirect}
+          className="w-full rounded-full border border-solid border-transparent bg-[#0f69cf] hover:bg-[#357ABD] text-white font-semibold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+        >
+          Go to Facial Expression Detection
+        </button>
       </div>
     </div>
   );
 }
-
-const BottomGradient = () => {
-  return (
-    <>
-      <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-      <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
-    </>
-  );
-};
-
-const LabelInputContainer = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  return (
-    <div className={cn("flex flex-col space-y-2 w-full", className)}>
-      {children}
-    </div>
-  );
-};

@@ -14,12 +14,12 @@ export default function SignupFormDemo() {
     <div className="bg-black min-h-screen flex items-center justify-center py-10">
       <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-black border border-neutral-800">
         <h2 className="font-bold text-xl text-white">
-          Welcome to Aceternity
+          Welcome to Face Recognizer
         </h2>
-        <p className="text-neutral-400 text-sm max-w-sm mt-2">
+        {/* <p className="text-neutral-400 text-sm max-w-sm mt-2">
           Login to Aceternity if you can because we don&apos;t have a login flow
           yet.
-        </p>
+        </p> */}
 
         <form className="my-8" onSubmit={handleSubmit}>
           <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
